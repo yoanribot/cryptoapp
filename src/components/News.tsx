@@ -1,6 +1,10 @@
 import React from "react";
 
-const News = () => {
+interface Props {
+  simplified?: boolean;
+}
+
+const News = (props: Props) => {
   return <div> NEWS </div>;
 };
 

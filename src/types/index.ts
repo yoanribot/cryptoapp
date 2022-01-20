@@ -1,1 +1,1 @@
-export type { default as Crypto } from './Crypto';
+export type { Crypto, CryptoCoin } from './Crypto';

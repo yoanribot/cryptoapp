@@ -2315,7 +2315,7 @@ const data = {
   "isFetching": false
 }
 
-function useMockCryptoApiData () {
+function useMockCryptoApiData (count) {
   return { data, isFetching: false };
 }
 

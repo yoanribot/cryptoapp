@@ -5,19 +5,18 @@ import { Link } from "react-router-dom";
 import { Typography, Row, Col, Statistic } from "antd";
 import Cryptocurrencies from "./Cryptocurrencies";
 import News from "./News";
+import Loader from "./Loader";
 
 import { useGetCryptosQuery } from "../services/cryptoApi";
-import useMockCryptoApiData from "../services/mock-crypto-api-data";
 
 const { Title } = Typography;
 
 const Homepage = () => {
-  // const { data, isFetching } = useGetCryptosQuery();
-  const { data, isFetching } = useMockCryptoApiData();
+  const { data, isFetching } = useGetCryptosQuery(10);
   console.log({ data, isFetching });
   const globalStats = data?.data?.stats;
 
-  if (isFetching) return <p>"Loading ..."</p>;
+  if (isFetching) return <Loader />;
 
   return (
     <>
@@ -34,7 +33,7 @@ const Homepage = () => {
         <Col span={12}>
           <Statistic
             title="Total Exchanges"
-            value={millify(globalStats?.totalExchanges!)}
+            value={millify(Number(globalStats?.totalExchanges!))}
           />
         </Col>
         <Col span={12}>
@@ -58,7 +57,7 @@ const Homepage = () => {
         <Col span={12}>
           <Statistic
             title="Total Markets"
-            value={millify(globalStats?.totalMarkets!)}
+            value={millify(Number(globalStats?.totalMarkets!))}
           />
         </Col>
       </Row>
@@ -70,7 +69,7 @@ const Homepage = () => {
           <Link to="/cryptocurrencies">Show more</Link>
         </Title>
       </div>
-      {/* <Cryptocurrencies simplified /> */}
+      <Cryptocurrencies simplified />
       <div className="home-heading-container">
         <Title level={2} className="home-title">
           Latest Crypto News
@@ -79,7 +78,7 @@ const Homepage = () => {
           <Link to="/news">Show more</Link>
         </Title>
       </div>
-      {/* <News simplified /> */}
+      <News simplified />
     </>
   );
 };
