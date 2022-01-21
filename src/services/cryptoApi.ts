@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Crypto } from "../types";
+import type { Crypto, CryptoCoin, CryptoHistory } from "../types";
 
 const cryptoApiHeaders = {
   'x-rapidapi-host': process.env.REACT_APP_CRYPTO_RAPIDAPI_HOST,
@@ -15,6 +15,18 @@ export const cryptoApi = createApi({
     getCryptos: builder.query<Crypto, number>({
       query: (count) => createRequest(`/coins?limit=${count}`),
     }),
+    getCryptoDetails: builder.query<{ data: { coin: CryptoCoin }}, string>({
+      query: (id) => createRequest(`/coin/${id}`),
+    }),
+
+    getCryptoHistory: builder.query<CryptoHistory, { coinId: string, timeperiod: string}>({
+      query: ({ coinId, timeperiod }) => createRequest(`coin/${coinId}/history?timePeriod=${timeperiod}`),
+    }),
+
+    // Note: To access this endpoint you need premium plan
+    getExchanges: builder.query({
+      query: () => createRequest('/exchanges'),
+    }),
   }),
 });
 
@@ -22,4 +34,7 @@ export const cryptoApi = createApi({
 // auto-generated based on the defined endpoints
 export const {
   useGetCryptosQuery,
+  useGetCryptoDetailsQuery,
+  useGetCryptoHistoryQuery,
+  useGetExchangesQuery,
 } = cryptoApi;
