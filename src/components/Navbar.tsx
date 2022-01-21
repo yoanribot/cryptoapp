@@ -12,26 +12,26 @@ import {
 import cryptocurrencyIcon from "../images/cryptocurrency.png";
 
 const Navbar = () => {
-  const [activeMenu, setActiveMenu] = useState(true);
-  // const [screenSize, setScreenSize] = useState(undefined);
+  const [activeMenu, setActiveMenu] = useState<boolean>(true);
+  const [screenSize, setScreenSize] = useState<number>(0);
 
-  // useEffect(() => {
-  //   const handleResize = () => setScreenSize(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
 
-  //   window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-  //   handleResize();
+    handleResize();
 
-  //   return () => window.removeEventListener('resize', handleResize);
-  // }, []);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  // useEffect(() => {
-  //   if (screenSize <= 800) {
-  //     setActiveMenu(false);
-  //   } else {
-  //     setActiveMenu(true);
-  //   }
-  // }, [screenSize]);
+  useEffect(() => {
+    if (screenSize <= 800) {
+      setActiveMenu(false);
+    } else {
+      setActiveMenu(true);
+    }
+  }, [screenSize]);
 
   return (
     <div className="nav-container">
@@ -40,12 +40,12 @@ const Navbar = () => {
         <Typography.Title level={2} className="logo">
           <Link to="/">My Crypto App</Link>
         </Typography.Title>
-        {/* <Button
+        <Button
           className="menu-control-container"
           onClick={() => setActiveMenu(!activeMenu)}
         >
           <MenuOutlined />
-        </Button> */}
+        </Button>
       </div>
       {activeMenu && (
         <Menu theme="dark">
