@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Crypto, CryptoCoin, CryptoHistory } from "../types";
+import type { Crypto, CryptoCoin, CryptoHistory, Exchanges } from "../types";
 
 const cryptoApiHeaders = {
   'x-rapidapi-host': process.env.REACT_APP_CRYPTO_RAPIDAPI_HOST,
@@ -24,7 +24,7 @@ export const cryptoApi = createApi({
     }),
 
     // Note: To access this endpoint you need premium plan
-    getExchanges: builder.query({
+    getExchanges: builder.query<Exchanges, void>({
       query: () => createRequest('/exchanges'),
     }),
   }),

@@ -35,3 +35,20 @@ export type CryptoHistory = {
     change: string,
   }
 }
+
+export type Exchange = {
+  uuid: string,
+  name: string,
+  description: string,
+  rank: number,
+  iconUrl: string,
+  volume: number,
+  numberOfMarkets: number,
+  marketShare: number
+};
+
+export type Exchanges = {
+  data: {
+    exchanges: Exchange[],
+  }
+};
